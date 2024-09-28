@@ -6,6 +6,7 @@ require("dotenv").config();
 const bookRoute = require("./route/bookRoute");
 const orderRoute = require("./route/orderRoute");
 const mailRoute = require("./route/mailRoute");
+const sellerRoute=require("./route/sellerRoute");
 const PORT = process.env.PORT || 8001;
 
 app.use(cors({ origin: "*" }));
@@ -24,6 +25,7 @@ mongoose
 app.use("/book", bookRoute);
 app.use("/order", orderRoute);
 app.use("/mail",mailRoute);
+app.use("/seller",sellerRoute)
 
 app.listen(PORT, () => {
   console.log("Server is running at port:" + PORT);
