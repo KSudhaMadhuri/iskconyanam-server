@@ -7,7 +7,7 @@ const secretKey = process.env.SECRETKEY;
 //creating Seller
 const sellerSignUp = async (req, res) => {
   try {
-    const { fullName, email, password, role } = req.body;
+    const { fullName, email, password, role, admin } = req.body;
     const exist = await Seller.findOne({ email });
     if (exist) {
       return res.status(400).json({ message: "Email already exist" });
@@ -18,6 +18,7 @@ const sellerSignUp = async (req, res) => {
         email,
         password: hashedPassword,
         role,
+        admin,
       });
       await registerSeller.save();
       res
@@ -55,8 +56,6 @@ const loginSeller = async (req, res) => {
   }
 };
 
-
-
 //getting sellerDetails
 const getSellerDetails = async (req, res) => {
   try {
@@ -73,30 +72,30 @@ const getSellerDetails = async (req, res) => {
   }
 };
 
-
 //get allsellers cotroller logic
 
-const getAllSellers = async(req,res)=>{
+const getAllSellers = async (req, res) => {
   try {
     const getSellers = await Seller.find();
-    if(!getSellers){
-      res.status(404).json({message:"No sellers found"})
+    if (!getSellers) {
+      res.status(404).json({ message: "No sellers found" });
     }
-    res.status(200).json({message:"All sellers fetched successfully",getSellers})
-    
+    res
+      .status(200)
+      .json({ message: "All sellers fetched successfully", getSellers });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error", error });
   }
-}
+};
 
 //updating sellerRole Controller logic
 const updateSellerRole = async (req, res) => {
   try {
-    const { role } = req.body;
+    const updateAll  = req.body;
     const updatedRole = await Seller.findByIdAndUpdate(
       req.params.id,
-      { $set: { role: role } },
+      updateAll,
       { new: true }
     );
     res
@@ -128,5 +127,5 @@ module.exports = {
   getSellerDetails,
   updateSellerRole,
   deleteSeller,
-  getAllSellers
+  getAllSellers,
 };
