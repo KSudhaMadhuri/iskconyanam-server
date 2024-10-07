@@ -3,7 +3,7 @@ const Order = require("../model/Order");
 //creatingOrder
 const placeOrder = async (req, res) => {
   try {
-    const { fullName, email, phone, address, city, state, pin, orderedBooks } =
+    const { fullName, email, phone, address, city, state, pin, orderedBooks,paymentScreenShot } =
       req.body;
     const orderBooks = new Order({
       fullName,
@@ -14,6 +14,7 @@ const placeOrder = async (req, res) => {
       state,
       pin,
       orderedBooks,
+      paymentScreenShot
     });
     await orderBooks.save();
     res.status(200).json({ message: "Ordered successfully" });
