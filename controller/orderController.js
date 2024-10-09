@@ -5,6 +5,7 @@ const placeOrder = async (req, res) => {
   try {
     const { fullName, email, phone, address, city, state, pin, orderedBooks,paymentScreenShot } =
       req.body;
+      const currentDate=new Date().toLocaleDateString("en-GB")
     const orderBooks = new Order({
       fullName,
       email,
@@ -14,7 +15,8 @@ const placeOrder = async (req, res) => {
       state,
       pin,
       orderedBooks,
-      paymentScreenShot
+      paymentScreenShot,
+      orderedDate:currentDate
     });
     await orderBooks.save();
     res.status(200).json({ message: "Ordered successfully" });
