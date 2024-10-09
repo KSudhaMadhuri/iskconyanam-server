@@ -18,7 +18,7 @@ const bookSchema = mongoose.Schema({
     required: true,
   },
   bookSummary: {
-    type: String
+    type: String,
   },
   bookPages: {
     type: String,
@@ -29,12 +29,15 @@ const bookSchema = mongoose.Schema({
     required: true,
   },
   bookSize: {
-    type: String
+    type: String,
   },
   bookWeight: {
-    type: String
+    type: String,
+  },
+  outOfStock: {
+    type: String,
   },
 });
 
-const Book=mongoose.model("Book",bookSchema);
-module.exports=Book
+const Book = mongoose.model("Book", bookSchema);
+module.exports = Book;

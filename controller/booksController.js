@@ -13,7 +13,9 @@ const creatingBooks = async (req, res) => {
       bookLanguage,
       bookSize,
       bookWeight,
+
     } = req.body;
+    const stock="stock"
     const saveBooks = new Book({
       bookName,
       bookAuthor,
@@ -24,6 +26,7 @@ const creatingBooks = async (req, res) => {
       bookLanguage,
       bookSize,
       bookWeight,
+      outOfStock:stock
     });
     await saveBooks.save();
     res.status(200).json({ message: "Book details saved successfully" });
