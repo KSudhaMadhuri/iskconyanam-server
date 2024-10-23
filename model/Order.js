@@ -42,7 +42,13 @@ const orderSchema = mongoose.Schema({
   orderedDate: {
     type: String,
     required: true,
+  },
+  orderMode:{
+    type: String,
+    required:true,
+    
   }
+
 });
 
 const Order = mongoose.model("Order", orderSchema);
