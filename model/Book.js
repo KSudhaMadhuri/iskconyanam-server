@@ -36,7 +36,12 @@ const bookSchema = mongoose.Schema({
   },
   outOfStock: {
     type: String,
+    required:true,
   },
+  itemType:{
+    type: String,
+    required:true,
+  }
 });
 
 const Book = mongoose.model("Book", bookSchema);
