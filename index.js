@@ -17,9 +17,20 @@ const allowedOrigins = [
 ];
 
 // CORS middleware
-app.use(cors({
-  origin: allowedOrigins,
-}));
+// CORS middleware
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Check if the request's origin is in the allowed list or is undefined (for non-browser requests)
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true); // Allow access
+    } else {
+      callback(new Error("Not allowed by CORS")); // Deny access
+    }
+  },
+  optionsSuccessStatus: 200, // For legacy browser support
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 mongoose
