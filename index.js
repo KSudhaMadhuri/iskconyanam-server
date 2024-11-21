@@ -9,7 +9,17 @@ const mailRoute = require("./route/mailRoute");
 const sellerRoute=require("./route/sellerRoute");
 const PORT = process.env.PORT || 8001;
 
-app.use(cors({ origin: "*" }));
+//app.use(cors({ origin: "*" }));
+// Allowed origins
+const allowedOrigins = [
+  "https://iskconyanamstores.netlify.app",
+  "https://iskconyanamstoresseller.netlify.app",
+];
+
+// CORS middleware
+app.use(cors({
+  origin: allowedOrigins,
+}));
 app.use(express.json());
 
 mongoose
