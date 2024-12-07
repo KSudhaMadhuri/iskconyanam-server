@@ -9,28 +9,28 @@ const mailRoute = require("./route/mailRoute");
 const sellerRoute=require("./route/sellerRoute");
 const PORT = process.env.PORT || 8001;
 
-app.use(cors({ origin: "*" }));
+// app.use(cors({ origin: "*" }));
 // Allowed origins
-// const allowedOrigins = [
-//   "https://iskconyanamstores.netlify.app",
-//   "https://iskconyanamstoresseller.netlify.app",
-// ];
+const allowedOrigins = [
+  "https://iskconyanamstores.netlify.app",
+  "https://iskconyanamstoresseller.netlify.app",
+];
 
 // CORS middleware
 // CORS middleware
-// const corsOptions = {
-//   origin: (origin, callback) => {
-//     // Check if the request's origin is in the allowed list or is undefined (for non-browser requests)
-//     if (allowedOrigins.includes(origin) || !origin) {
-//       callback(null, true); // Allow access
-//     } else {
-//       callback(new Error("Not allowed by CORS")); // Deny access
-//     }
-//   },
-//   optionsSuccessStatus: 200, // For legacy browser support
-// };
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Check if the request's origin is in the allowed list or is undefined (for non-browser requests)
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true); // Allow access
+    } else {
+      callback(new Error("Not allowed by CORS")); // Deny access
+    }
+  },
+  optionsSuccessStatus: 200, // For legacy browser support
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 mongoose
